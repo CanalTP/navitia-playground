@@ -46,8 +46,7 @@ var autocompleteTree = {
     }
 };
 
-var staticAutocompleteTypes = ['companies',
-    'coverage',
+var staticAutocompleteTypes = ['coverage',
     'physical_modes',
     'poi_types'];
 
