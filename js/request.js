@@ -6,8 +6,10 @@ function makeDeleteButton() {
 }
 
 function insertRoute(val) {
-    var currentRouteValue = $('.route', $(val).parent()).val();
-    $(val).parent().after(makeRoute('', currentRouteValue));
+    var currentRoute = $('.route', $(val).parent());
+    var posRoute = getRouteInputPos(val);
+    var currentRouteValue = currentRoute.val();
+    $(val).parent().after(makeRoute('', currentRouteValue, posRoute));
 }
 
 function makeTemplatePath(val, currentRouteValue, input) {
@@ -21,33 +23,14 @@ function makeTemplatePath(val, currentRouteValue, input) {
     } else { input.focus(function(){ updateUrl(this); this.value=''; } )}
 }
 
-function makeRoute(val, currentRouteValue) {
-    var input = '', res = '';
-    
-    if (currentRouteValue == 'coverage') {
-        input = $('<input/>').focus(function(){ routeValOnFocus(this); })
+function makeRoute(val, currentRouteValue, pos) {
+    var input = $('<input/>').focus(function(){ routeValOnFocus(this); })
                              .keyup(function(){ updateUrl(this); })
-                             .attr('type','text')
-                             .addClass('route');
-        if (isTemplate(val)) { makeTemplatePath(val, currentRouteValue, input); }
-        res = $('<span/>')
-        .addClass('toDelete')
-        .addClass('routeElt')
-        .append(' ')
-        .append($('<span/>')
-                .addClass('pathElt')
-                .append(input)
-                .append(makeDeleteButton()))
-        .append('<button class="add" onclick="insertRoute(this)">+</button>');
-        makeCoverageList(val, input);
-    } else {
-        input = $('<input/>').focus(function(){ updateUrl(this); })
-                             .keyup(function(){ updateUrl(this); })
-                             .attr('type','text')
+                             .attr('type', 'text')
                              .addClass('route')
                              .val(val);
-        if (isTemplate(val)) { makeTemplatePath(val, currentRouteValue, input); }
-        res = $('<span/>')
+    if (isTemplate(val)) { makeTemplatePath(val, currentRouteValue, input); }
+    var res = $('<span/>')
         .addClass('toDelete')
         .addClass('routeElt')
         .append(' ')
@@ -56,25 +39,16 @@ function makeRoute(val, currentRouteValue) {
                 .append(input)
                 .append(makeDeleteButton()))
         .append('<button class="add" onclick="insertRoute(this)">+</button>');
-    }
+    var isObjectId = pos % 2;
+    makeRouteAutocomplete(currentRouteValue, input, isObjectId);
     return res;
 }
 
 function routeValOnFocus(valInput) {
-    var cov = $('.route', $(valInput).parent().parent().prev()).val();
-
-    if (cov == 'coverage' && ! isAutoCompleteInput($(valInput))) {
-        makeCoverageList($(valInput).val(), valInput);
-    } else if (cov != 'coverage' && isAutoCompleteInput($(valInput))) {
-        var valueElt = $('<input/>').addClass('route')
-                                    .attr('type', 'text')
-                                    .val($(valInput).val())
-                                    .focus(function(){ routeValOnFocus(this); })
-                                    .keyup(function(){ updateUrl(this); });
-        $(valInput).replaceWith(valueElt);
-        valueElt.focus();
-        valInput = valueElt;
-    }
+    var prevVal = $('.route', $(valInput).closest('.toDelete.routeElt').prev()).val();
+    var posRoute = getRouteInputPos(valInput);
+    var isObjectId = posRoute % 2;
+    makeRouteAutocomplete(prevVal, $(valInput), isObjectId);
     updateUrl(valInput);
 }
 
@@ -142,35 +116,38 @@ function getFocusedElemValue(elemToTest, focusedElem, noEncoding) {
     return noEncoding ? elemToTest.value : elemToTest.value.encodeURI();
 }
 
-function makeCoverageList(val, obj) {
-    var api = $("#api input.api").attr('value');
-    var token = $('#token input.token').val();
-    var request =  api + "/coverage";
-    
-    $.ajax({
-        headers: isUndefined(token) ? {} : { Authorization: "Basic " + btoa(token) },
-        dataType: "json",
-        url: request,
-        success: function(data) {
-                var res = [];
-                for (var dict in data) {
-                    for (var cov = 0; cov < data[dict].length; cov++) {
-                        res.push(data[dict][cov].id);
-                    }
-                    if (val) { $(obj).val(val); }
-                    var auto = $(obj).autocomplete({source: res, minLength: 0, scroll: true, delay: 500});
-                    auto.focus(function() {
-                        auto.autocomplete("search", '');
-                    });
-                    return auto;
-                }
-            }
-    });
+function makeRouteAutocomplete(currentRouteValue, input, isObjectId) {
+    if (isUndefined(currentRouteValue)) {
+        // first route input
+        $(input).autocomplete({source: autocompleteTree.routeTree.undefined,
+            minLength: 0,
+            scroll: true,
+            delay: 500}).focus(function() {
+                $(this).autocomplete("search", '');
+            });
+    } else if (! isObjectId) {
+        // TODO: better way to do this?
+        var prevType = $('.route', $(input).closest('.toDelete.routeElt').prev().prev()).val();
+        var source = autocompleteTree.routeTree[prevType];
+        source  = (! isUndefined(source)) ? source :  autocompleteTree.routeTree.all;
+        $(input).autocomplete({source: source,
+            minLength: 0,
+            scroll: true,
+            delay: 500}).focus(function() {
+                $(this).autocomplete("search", '');
+            });
+    }else if (isObjectId) {
+        if (staticAutocompleteTypes.indexOf(currentRouteValue) > -1){
+            staticAutocomplete(input, currentRouteValue);
+        } else if(dynamicAutocompleteTypes.indexOf(currentRouteValue) > -1){
+            dynamicAutocomplete(input, currentRouteValue);
+        }
+    }
 }
 
 function finalUrl(focusedElem) {
     var finalUrl = getFocusedElemValue($('#api input.api')[0], focusedElem, true);
-    $("#route input.route").each(function(){
+    $("#Meppath input.route").each(function(){
         finalUrl += '/' + getFocusedElemValue(this, focusedElem);
     });
 
@@ -202,14 +179,14 @@ function updateUrl(focusedElem) {
 function getCoverage() {
     var prevIsCoverage = false;
     var coverage = null;
-    var covElt = $("#route input.route").each(function() {
+    var covElt = $("#Meppath input.route").each(function() {
         if (prevIsCoverage) {
             coverage = $(this).val();
         }
         prevIsCoverage = $(this).val() == 'coverage';
     });
     return coverage;
-} 
+}
 
 function makeAutocomplete(elt) {
     $(elt).autocomplete({
@@ -295,10 +272,11 @@ $(document).ready(function() {
     $("#token input.token").attr('value', request.token);
     $("#urlFormToken").attr('value', request.token);
     $("#api input.api").attr('value', request.api);
-
+    var pos = 0;
     request.path.forEach(function(r) {
         var currentRouteValue = $('#route span .route').last().val();
-        $("#route").append(makeRoute(r, currentRouteValue));
+        $("#route").append(makeRoute(r, currentRouteValue, pos));
+        ++pos;
     });
 
     var param_elt = $("#parameterList");

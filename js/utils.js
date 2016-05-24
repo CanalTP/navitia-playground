@@ -18,6 +18,19 @@ function isDatePicker(elt) {
     return elt.attr('class').indexOf('ui-autocomplete-input') > -1;
 }
 
+// TODO: Find an elegant way to do this?
+function getRouteInputPos(input){
+    var pos = 0;
+    $("#Meppath input.route").each(function() {
+        if (! (this==input)) {
+            ++pos;
+        } else {
+            return false;
+        }
+    });
+    return pos;
+}
+
 function htmlEncode(value) {
     return $('<div/>').text(value).html();
 }
