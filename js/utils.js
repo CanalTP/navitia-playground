@@ -21,7 +21,7 @@ function isDatePicker(elt) {
 // TODO: Find an elegant way to do this?
 function getRouteInputPos(input){
     var pos = 0;
-    $("#route input.route").each(function() {
+    $("#Meppath input.route").each(function() {
         if (! (this==input)) {
             ++pos;
         } else {

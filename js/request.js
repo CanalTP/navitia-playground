@@ -149,7 +149,7 @@ function makeRouteAutocomplete(currentRouteValue, input, isObjectId) {
 
 function finalUrl(focusedElem) {
     var finalUrl = getFocusedElemValue($('#api input.api')[0], focusedElem, true);
-    $("#route input.route").each(function(){
+    $("#Meppath input.route").each(function(){
         finalUrl += '/' + getFocusedElemValue(this, focusedElem);
     });
 
@@ -181,7 +181,7 @@ function updateUrl(focusedElem) {
 function getCoverage() {
     var prevIsCoverage = false;
     var coverage = null;
-    var covElt = $("#route input.route").each(function() {
+    var covElt = $("#Meppath input.route").each(function() {
         if (prevIsCoverage) {
             coverage = $(this).val();
         }
