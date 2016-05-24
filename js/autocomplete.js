@@ -1,9 +1,10 @@
 var autocompleteTree = {
     routeTree: {
         'undefined' : ['coverage', 'places', 'journeys', 'coord'],
-        others : ['addresses',
+        all : ['addresses',
         'commercial_modes',
         'companies',
+        'departures',
         'disruptions',
         'networks',
         'lines',
@@ -18,10 +19,27 @@ var autocompleteTree = {
         'stop_schedules',
         'vehicles_journeys',
         'places',
-        'departures',
         'stop_schedules',
         ],
-        
+        addresses : ['places_nearby'],
+        coverage : ['addresses',
+        'commercial_modes',
+        'companies',
+        'disruptions',
+        'networks',
+        'lines',
+        'physical_modes',
+        'places_nearby',
+        'poi_types',
+        'pois',
+        'route_schedule',
+        'routes',
+        'stop_areas',
+        'stop_points',],
+        places_nearby : [],
+        pois : ['places_nearby'],
+        stop_areas : ['departures', 'places_nearby', 'stop_schedules'],
+        stop_points : ['departures', 'places_nearby', 'stop_schedules'],
         // TODO Complete the tree
     }
 };
@@ -102,8 +120,10 @@ function dynamicAutocomplete(elt, dynamicType) {
             var token = $('#token input.token').val();
             var url = $('#api input.api').val();
             var cov = getCoverage();
+            // cov can be null in case where coverage is not specifeid
+            var cov = cov ? ('coverage/' + cov) : '';
             $.ajax({
-                url: '{0}/coverage/{1}/{2}{3}'.format(url, cov, httpReq, request.term.encodeURI()),
+                url: '{0}/{1}/{2}{3}'.format(url, cov, httpReq, request.term.encodeURI()),
                 headers: isUndefined(token) ? {} : { Authorization: "Basic " + btoa(token) },
                 success: function(data) {
                     var res = [];

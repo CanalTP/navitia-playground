@@ -121,15 +121,18 @@ function getFocusedElemValue(elemToTest, focusedElem, noEncoding) {
 function makeRouteAutocomplete(currentRouteValue, input, isObjectId) {
     if (isUndefined(currentRouteValue)) {
         // first route input
-        $(input).autocomplete({source: autocompleteTree.routeTree['undefined'],
+        $(input).autocomplete({source: autocompleteTree.routeTree.undefined,
             minLength: 0,
             scroll: true,
             delay: 500}).focus(function() {
                 $(this).autocomplete("search", '');
             });
     } else if (! isObjectId) {
-        console.log(currentRouteValue);
-        $(input).autocomplete({source: autocompleteTree.routeTree['others'],
+        // TODO: better way to do this?
+        var prevType = $('.route', $(input).parent().parent().prev().prev()).val();
+        var source = autocompleteTree.routeTree[prevType];
+        source  = (! isUndefined(source)) ? source :  autocompleteTree.routeTree.all;
+        $(input).autocomplete({source: source,
             minLength: 0,
             scroll: true,
             delay: 500}).focus(function() {
