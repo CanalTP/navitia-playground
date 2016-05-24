@@ -46,7 +46,6 @@ function makeRoute(val, currentRouteValue, pos) {
 
 function routeValOnFocus(valInput) {
     var prevVal = $('.route', $(valInput).closest('.toDelete.routeElt').prev()).val();
-    console.log(prevVal);
     var posRoute = getRouteInputPos(valInput);
     var isObjectId = posRoute % 2;
     makeRouteAutocomplete(prevVal, $(valInput), isObjectId);
@@ -187,7 +186,7 @@ function getCoverage() {
         prevIsCoverage = $(this).val() == 'coverage';
     });
     return coverage;
-} 
+}
 
 function makeAutocomplete(elt) {
     $(elt).autocomplete({
@@ -228,6 +227,42 @@ function makeDatetime(elt) {
         controlType: 'select',
         oneLine: true,
     });
+}
+
+function parseUrl() {
+    var search = new URI(window.location).search(true);
+    var request = search['request'];
+    if (isUndefined(request)) { return null; }
+
+    var req_uri = new URI(request);
+    var api = req_uri.origin();
+    var paths = req_uri.path().split('/');
+    paths = paths.length == 1 ? [] : paths.slice(1);
+    var api_path = [];
+
+    var vxxFound = false;
+    paths.forEach(function(r) {
+        if (!r) { return; }
+        if (vxxFound) {
+            api_path.push(r.decodeURI());
+        } else {
+            api += '/' + r.decodeURI();
+            vxxFound = /^v\d+$/.test(r);
+        }
+    });
+
+    var params = req_uri.search(true);
+
+    var token = search['token'];
+    if (isUndefined(token)) { token = getTokenFromStorage(api); }
+
+    return {
+        token: token,
+        request: request,
+        api: api,
+        path: api_path,
+        query: isUndefined(params) ? {} : params
+    };
 }
 
 $(document).ready(function() {
