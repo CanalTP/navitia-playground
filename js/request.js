@@ -266,52 +266,30 @@ function parseUrl() {
 }
 
 $(document).ready(function() {
-    var search = new URI(window.location).search(true);
-    var token = search['token'];
-    if (isUndefined(token)) { token = ''; }
-    $("#token input.token").attr('value', token);
-    $("#urlFormToken").attr('value', token);
-
-    var request = search['request'];
-    if (isUndefined(request)) { return; }
-
-    var req_uri = new URI(request);
-    var origin = req_uri.origin();
-    var paths = req_uri.path().split('/');
-    // The first element after a split is an empty string("")
-    if (paths.length == 1) { return; }
-    var api = origin;
-
-    var vxxFound = false;
+    var request = parseUrl();
+    if (request === null) { return; }
+    if (isUndefined(request.token)) { request.token = ''; }
+    $("#token input.token").attr('value', request.token);
+    $("#urlFormToken").attr('value', request.token);
+    $("#api input.api").attr('value', request.api);
     var pos = 0;
-    paths.slice(1).forEach(function(r) {
-        if (!r) { return; }
-        if (vxxFound) {
-            var currentRouteValue = $('#route span .route').last().val();
-            $("#route").append(makeRoute(r.decodeURI(), currentRouteValue, pos));
-            ++pos;
-        } else {
-            api = api + '/' + r.decodeURI();
-            vxxFound = /^v\d+$/.test(r);
-            $("#api input.api").attr('value', api);
-        }
-    })
+    request.path.forEach(function(r) {
+        var currentRouteValue = $('#route span .route').last().val();
+        $("#route").append(makeRoute(r, currentRouteValue, pos));
+        ++pos;
+    });
 
-    var params = req_uri.search(true);
-
-    if (! isUndefined(params)) {
-        var param_elt = $("#parameterList");
-        for (var key in params) {
-            var value = params[key];
-            // a list of params, ex.: forbidded_uris[]
-            if (Array.isArray(value)) {
-                value.forEach(function(v){
+    var param_elt = $("#parameterList");
+    for (var key in request.query) {
+        var value = request.query[key];
+        // a list of params, ex.: forbidded_uris[]
+        if (Array.isArray(value)) {
+            value.forEach(function(v){
                 param_elt.append(makeParam(key.decodeURI(), v.decodeURI()));
-                });
-            } else {
-                param_elt.append(makeParam(key.decodeURI(), params[key]));
-            }
+            });
+        } else {
+            param_elt.append(makeParam(key.decodeURI(), value));
         }
     }
-    $('#urlDynamic span').html(request);
+    $('#urlDynamic span').html(request.request);
 });
