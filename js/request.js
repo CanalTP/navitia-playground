@@ -137,9 +137,9 @@ function makeRouteAutocomplete(currentRouteValue, input, isObjectId) {
                 $(this).autocomplete("search", '');
             });
     }else if (isObjectId) {
-        if (staticAutocompleteTypes.includes(currentRouteValue)){
+        if (staticAutocompleteTypes.indexOf(currentRouteValue) > -1){
             staticAutocomplete(input, currentRouteValue);
-        } else if(dynamicAutocompleteTypes.includes(currentRouteValue)){
+        } else if(dynamicAutocompleteTypes.indexOf(currentRouteValue) > -1){
             dynamicAutocomplete(input, currentRouteValue);
         }
     }
