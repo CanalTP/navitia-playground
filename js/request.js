@@ -45,9 +45,8 @@ function makeRoute(val, currentRouteValue, pos) {
 }
 
 function routeValOnFocus(valInput) {
-    var cov = $('.route', $(valInput).parent().parent().prev()).val();
-
-    var prevVal = $('.route', $(valInput).parent().parent().prev()).val();
+    var prevVal = $('.route', $(valInput).closest('.toDelete.routeElt').prev()).val();
+    console.log(prevVal);
     var posRoute = getRouteInputPos(valInput);
     var isObjectId = posRoute % 2;
     makeRouteAutocomplete(prevVal, $(valInput), isObjectId);
@@ -129,7 +128,7 @@ function makeRouteAutocomplete(currentRouteValue, input, isObjectId) {
             });
     } else if (! isObjectId) {
         // TODO: better way to do this?
-        var prevType = $('.route', $(input).parent().parent().prev().prev()).val();
+        var prevType = $('.route', $(input).closest('.toDelete.routeElt').prev().prev()).val();
         var source = autocompleteTree.routeTree[prevType];
         source  = (! isUndefined(source)) ? source :  autocompleteTree.routeTree.all;
         $(input).autocomplete({source: source,
