@@ -185,7 +185,7 @@ function sectionSummary(section) {
 
 function coverageSummary(json) {
     json.regions.forEach(function (r){
-        r.name = r.name ? r.name : r.id;
+        r.name = r.name ? r.id + " ({0})".format(r.name) : r.id;
     });
     return json;
 }
