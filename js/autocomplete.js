@@ -17,7 +17,11 @@ var autocompleteTree = {
         'stop_points',
         'stop_schedules',
         'vehicles_journeys',
-        'places'],
+        'places',
+        'departures',
+        'stop_schedules',
+        ],
+        
         // TODO Complete the tree
     }
 };
@@ -38,7 +42,6 @@ function staticAutocomplete(input, staticType){
     } else {
         request =  api +  '/coverage/' + cov + '/' + staticType;
     }
-    console.log(request);
     $.ajax({
         headers: isUndefined(token) ? {} : { Authorization: "Basic " + btoa(token) },
         dataType: "json",
