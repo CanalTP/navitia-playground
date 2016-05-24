@@ -66,6 +66,7 @@ function staticAutocomplete(input, staticType){
         url: request,
         success: function(data) {
                 var res = [];
+                summary(staticType, data);
                 staticType = (staticType=='coverage') ? 'regions' :  staticType;
                 data[staticType].forEach(function(elt){
                     res.push({ value: elt.id, label: elt.name })
