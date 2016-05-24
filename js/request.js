@@ -283,11 +283,13 @@ $(document).ready(function() {
     var api = origin;
 
     var vxxFound = false;
+    var pos = 0;
     paths.slice(1).forEach(function(r) {
         if (!r) { return; }
         if (vxxFound) {
             var currentRouteValue = $('#route span .route').last().val();
-            $("#route").append(makeRoute(r.decodeURI(), currentRouteValue));
+            $("#route").append(makeRoute(r.decodeURI(), currentRouteValue, pos));
+            ++pos;
         } else {
             api = api + '/' + r.decodeURI();
             vxxFound = /^v\d+$/.test(r);
