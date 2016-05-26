@@ -184,10 +184,12 @@ function sectionSummary(section) {
 }
 
 function coverageSummary(json) {
+    var summary = {regions: []};
     json.regions.forEach(function (r){
-        r.name = r.name ? r.id + " ({0})".format(r.name) : r.id;
+        var name = r.name ? r.id + " ({0})".format(r.name) : r.id;
+        summary.regions.push({name: name, id: r.id});
     });
-    return json;
+    return summary;
 }
 
 function summary(type, json) {
