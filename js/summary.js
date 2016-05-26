@@ -183,7 +183,7 @@ function sectionSummary(section) {
     return res;
 }
 
-function coverageSummary(json) {
+function regionSummary(json) {
     var summary = {regions: []};
     json.regions.forEach(function (r){
         var name = r.name ? r.id + " ({0})".format(r.name) : r.id;
@@ -201,7 +201,7 @@ function summary(type, json) {
     case 'place':
         return embeddedSummary(json);
     case 'section': return sectionSummary(json);
-    case 'coverage' : return coverageSummary(json);
+    case 'coverage' : return regionSummary(json);
         // insert here your custom summary
     default: return defaultSummary(json);
     }

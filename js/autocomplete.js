@@ -128,11 +128,12 @@ function dynamicAutocomplete(elt, dynamicType) {
                 headers: isUndefined(token) ? {} : { Authorization: "Basic " + btoa(token) },
                 success: function(data) {
                     var res = [];
+                    var beautifiedData = summary(staticType, data);
                     var search = null;
                     if ('places' in data) {
-                        search = data['places'];
+                        search = beautifiedData['places'];
                     }else if ('pt_objects' in data) {
-                        search = data['pt_objects'];
+                        search = beautifiedData['pt_objects'];
                     }
                     if (search) {
                         search.forEach(function(s) {
