@@ -80,7 +80,7 @@ var autocomplete = {
             source = this.autocompleteTree[type].empty;
         } else if (type === 'paramKey'){
             var feature = $('#featureInput').val();
-            source = this.autocompleteTree[type][feature] || this.autocompleteTree[type].empty;
+            source = (this.autocompleteTree[type][feature] || this.autocompleteTree[type].empty).concat(getCustomParamsKey());
         } else {
             source = this.autocompleteTree[type].all;
         }
