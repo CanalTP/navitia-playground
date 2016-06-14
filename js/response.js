@@ -159,6 +159,7 @@ $(document).ready(function() {
             saveToken(request.api, request.token);
             // update the drop list of autocompletion for API
             autocomplete.apiAutocomplete();
+            saveCustomParamsKey(request);
         },
         function(xhr, status, error) {
             setStatus(xhr, start_time);
