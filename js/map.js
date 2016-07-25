@@ -140,11 +140,13 @@ var map = {
         if ((features = map.getFeatures(context, type, json)).length) {
             div.addClass('leaflet');
             var m = L.map(div.get(0)).setView([48.843693, 2.373303], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-	        attribution: 'Tiles courtesy of ' +
-                    '<a href="http://openstreetmap.se/">OpenStreetMap Sweden</a>' +
-                    ' &mdash; Map data &copy; ' +
-                    '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            L.tileLayer('//stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+	        attribution: 'Map tiles by ' +
+                    '<a href="http://stamen.com">Stamen Design</a>, under ' +
+                    '<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ' +
+                    'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
+                maxZoom: 18
             }).addTo(m);
             var overlay = L.featureGroup(features).addTo(m);
             setTimeout(function() {
