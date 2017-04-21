@@ -12,6 +12,9 @@ Installing the dependencies:
 * Check first your node version with `node --version` and get a recent version if needed (should work with node 4.4 and 6.0). [Ubuntu/Debian installation](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
 * `sudo npm install gulp -g && sudo npm install bower -g && npm install && bower install`
 
+You can optionally install packages with [yarn](https://yarnpkg.com/en/) instead of npm
+* `sudo npm install -g gulp yarn bower && yarn install && bower install`
+
 To launch:
 * `gulp dev`
 
