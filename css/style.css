@@ -1,0 +1,593 @@
+body {
+  color: #353535;
+  background-color: #EFEFEF;
+  margin: 0;
+  padding-bottom: 3.2em;
+  font-family: 'OpenSans', sans-serif;
+  font-size: 100%;
+  min-height: calc(100vh - 3.2em);
+  position: relative; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  line-height: 1.2em;
+  background-color: #353535;
+  color: #EFEFEF; }
+  footer a {
+    color: inherit; }
+
+h2 {
+  text-align: center;
+  margin: 1.5em 0 1em 0;
+  font-size: 1.5em; }
+
+p.center {
+  text-align: center;
+  margin: 2em 0; }
+
+#content {
+  margin: 0; }
+
+.hContainer {
+  padding: 0.5em;
+  max-width: 103em;
+  margin: auto; }
+
+#give {
+  background: white; }
+  #give #file-input {
+    display: none; }
+  #give #file-input + label {
+    padding: 0.5em 2em;
+    border: none;
+    border-radius: 0.25em;
+    color: white;
+    background-color: #298bbc;
+    text-transform: uppercase;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer; }
+
+#goTopButton {
+  display: none;
+  position: fixed;
+  bottom: 3%;
+  right: 1%;
+  z-index: 99;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0.5em 0.9em 0.75em 0.85em; }
+
+hr {
+  display: block;
+  height: 0;
+  width: 0;
+  margin: 0 auto -1em auto;
+  border-style: solid;
+  border-width: 2em 2em 0 2em;
+  border-color: white transparent transparent transparent; }
+
+button {
+  padding: 0.5em 2em;
+  margin: 0 0.5em;
+  border: none;
+  border-radius: 0.25em;
+  color: white;
+  background-color: #298bbc;
+  text-transform: uppercase;
+  font: inherit;
+  font-weight: bold; }
+
+:focus {
+  outline: 0.05em dotted #353535;
+  outline-offset: -0.05em; }
+
+a {
+  color: #298bbc;
+  text-decoration: underline; }
+
+.inputDiv {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  width: 25em;
+  margin: 0 1em 1.25em 0;
+  padding: 0;
+  line-height: 1.2em;
+  background-color: white;
+  border-style: solid;
+  border-width: 0 0 0.2em 0;
+  border-color: #EFEFEF; }
+  .inputDiv input {
+    width: 100%;
+    min-width: 5em;
+    border: none;
+    padding: 0.5em;
+    background-color: transparent;
+    font: inherit;
+    text-overflow: ellipsis; }
+  .inputDiv .key {
+    margin: 0;
+    padding: 0.5em;
+    font-weight: bold;
+    background-color: #EFEFEF;
+    border-radius: 0.25em 0 0 0; }
+  .inputDiv button {
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    padding: 0.5em 0.25em;
+    margin: 0;
+    font: inherit;
+    font-weight: bold;
+    color: #298bbc;
+    text-transform: uppercase; }
+  .inputDiv button:disabled {
+    color: #DEDEDE; }
+  .inputDiv button img {
+    vertical-align: text-top;
+    height: 1.2em; }
+  .inputDiv button:disabled img {
+    opacity: 0.2; }
+
+#header {
+  width: 100%;
+  background: #FFF;
+  height: 6em;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  border-bottom: solid 0.15em #EFEFEF; }
+
+#back {
+  padding: 0; }
+
+#logo {
+  width: 23em;
+  height: auto;
+  margin: 1.2em 0 0 1.6em; }
+
+#picto {
+  vertical-align: middle;
+  height: 3ex;
+  width: 3ex; }
+
+#doc {
+  float: left;
+  padding: 2.1em 1.6em 0 1em;
+  border-top: solid 0.4em transparent;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #353535; }
+
+#doc:hover {
+  border-top: solid 0.4em #298bbc;
+  color: #353535; }
+
+li {
+  list-style: none; }
+
+#urlheader {
+  margin: 1.6em; }
+
+@media screen and (max-width: 62em) {
+  #urlheader {
+    display: none; } }
+
+@media screen and (max-width: 33.438em) {
+  #header {
+    flex-direction: column;
+    height: auto; }
+  #logo {
+    float: left;
+    margin: 0 0 0 1em;
+    width: 15em; }
+  #picto {
+    height: 2.5ex;
+    width: 2.5ex;
+    margin: 0 auto;
+    padding: 0.05em 0.2em 0 1.3em; }
+  #doc {
+    padding: 0em 1em 0.5em 1em;
+    margin: 0 auto;
+    border-bottom: solid 0.2em transparent;
+    border-top: none; }
+  #doc:hover {
+    border-bottom: solid 0.2em #298bbc;
+    border-top: none; } }
+
+.ui-widget, .notifyjs-navitia-base {
+  border-style: solid;
+  border-width: 0.1ex;
+  border-color: #DEDEDE;
+  background: white;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2); }
+
+.notifyjs-navitia-base {
+  font-weight: bold;
+  padding: 0.5em; }
+
+.ui-widget-header {
+  border-style: solid;
+  border-width: 0 0 0.1ex 0;
+  border-color: #DEDEDE;
+  background: #EFEFEF;
+  padding: 0.5em; }
+
+.ui-helper-hidden-accessible {
+  display: none; }
+
+.ui-autocomplete {
+  max-height: 20em;
+  overflow-y: auto;
+  padding: 0;
+  position: absolute; }
+  .ui-autocomplete .ui-menu-item {
+    padding: 0.2em 0.5em;
+    line-height: 1.5em; }
+  .ui-autocomplete .ui-state-focus {
+    background: #abd7ed; }
+
+.ui-datepicker-header span.ui-icon {
+  display: none; }
+
+.ui-datepicker-header a {
+  color: inherit;
+  text-decoration: none; }
+
+.ui-datepicker-header a.ui-datepicker-prev:after {
+  content: '<'; }
+
+.ui-datepicker-header a.ui-datepicker-prev {
+  display: block;
+  float: left;
+  cursor: pointer; }
+
+.ui-datepicker-header a.ui-datepicker-next:after {
+  content: '>'; }
+
+.ui-datepicker-header a.ui-datepicker-next {
+  display: block;
+  float: right;
+  cursor: pointer; }
+
+.ui-datepicker-header .ui-datepicker-title {
+  text-align: center; }
+
+table.ui-datepicker-calendar {
+  width: 100%;
+  border-spacing: 0.5em; }
+  table.ui-datepicker-calendar a {
+    color: inherit;
+    text-decoration: none; }
+  table.ui-datepicker-calendar td {
+    text-align: right; }
+  table.ui-datepicker-calendar .ui-datepicker-today {
+    font-weight: bold; }
+  table.ui-datepicker-calendar .ui-datepicker-current-day {
+    background: #abd7ed; }
+
+.ui-timepicker-div.ui-timepicker-oneLine {
+  padding: 0.5em; }
+  .ui-timepicker-div.ui-timepicker-oneLine dl {
+    margin: 0; }
+  .ui-timepicker-div.ui-timepicker-oneLine dt.ui_tpicker_time_label {
+    padding: 0.5em;
+    padding-left: 0; }
+  .ui-timepicker-div.ui-timepicker-oneLine select {
+    background: #EFEFEF;
+    border: 0.1em solid #DEDEDE;
+    padding: 0.3em;
+    font-family: inherit;
+    font-size: inherit; }
+
+.ui-datepicker-buttonpane {
+  padding: 0.5em; }
+  .ui-datepicker-buttonpane button {
+    padding: 0.5em; }
+  .ui-datepicker-buttonpane button.ui-datepicker-close {
+    float: right; }
+
+#request {
+  background-color: white;
+  overflow-x: hidden; }
+  #request #credentials, #request #path, #request #parameters {
+    display: flex;
+    flex-flow: row wrap;
+    width: calc(100% + 1em);
+    height: auto; }
+  #request .templateInput {
+    box-shadow: 0 0 0.5em #298bbc; }
+  #request button::-moz-focus-inner {
+    border-style: none;
+    padding: 0; }
+  #request #credentials .key {
+    background-color: #fbede0; }
+  #request #credentials .inputDiv {
+    border-color: #c9731d;
+    border-radius: 0.25em 0.25em 0 0; }
+  #request #credentials .templateInput {
+    box-shadow: 0 0 0.5em #c9731d; }
+  #request #credentials .inputDiv button {
+    color: #c9731d; }
+  #request #credentials .inputDiv button:disabled {
+    color: #DEDEDE; }
+  #request #credentials .tooltips {
+    white-space: nowrap; }
+  #request #path .key {
+    background-color: #f5f6e4; }
+  #request #path .inputDiv {
+    border-color: #a3ab3a;
+    border-radius: 0.25em 0.25em 0 0; }
+  #request #path .templateInput {
+    box-shadow: 0 0 0.5em #a3ab3a; }
+  #request #path .inputDiv button {
+    color: #a3ab3a; }
+  #request #path .inputDiv button:disabled {
+    color: #DEDEDE; }
+  #request #path .tooltips {
+    white-space: nowrap; }
+  #request #parameters .key {
+    background-color: #e2f1f9; }
+  #request #parameters .inputDiv {
+    border-color: #298bbc;
+    border-radius: 0.25em 0.25em 0 0; }
+  #request #parameters .templateInput {
+    box-shadow: 0 0 0.5em #298bbc; }
+  #request #parameters .inputDiv button {
+    color: #298bbc; }
+  #request #parameters .inputDiv button:disabled {
+    color: #DEDEDE; }
+  #request #parameters .tooltips {
+    white-space: nowrap; }
+  #request #feature.inputDiv {
+    border-color: #6e3ea8; }
+  #request #urlDiv {
+    width: 100%; }
+  #request #requestUrl {
+    margin: 0.5em;
+    overflow-x: auto; }
+    #request #requestUrl a {
+      color: inherit; }
+    #request #requestUrl .api {
+      background-color: #f2cca6; }
+      #request #requestUrl .api .focusedParam {
+        background-color: #c9731d;
+        color: white; }
+    #request #requestUrl .path {
+      background-color: #e2e5b3; }
+      #request #requestUrl .path .focusedParam {
+        background-color: #a3ab3a;
+        color: white; }
+    #request #requestUrl .feature {
+      background-color: #cab5e3; }
+      #request #requestUrl .feature .focusedParam {
+        background-color: #6e3ea8;
+        color: white; }
+    #request #requestUrl .parameters {
+      background-color: #abd7ed; }
+      #request #requestUrl .parameters .focusedParam {
+        background-color: #298bbc;
+        color: white; }
+  #request #submitDiv {
+    text-align: center;
+    margin: 0 0 1.25em 0; }
+
+#status {
+  margin: 0 0 3em 0;
+  text-align: center; }
+
+.leaflet-tooltip {
+  background: #353535;
+  border-color: #353535;
+  color: white;
+  font-weight: bold; }
+
+.leaflet-tooltip-left::before {
+  border-left-color: #353535; }
+
+.leaflet-tooltip-right::before {
+  border-right-color: #353535; }
+
+.leaflet-control-layers-toggle {
+  background-image: url(../lib/img/leaflet/dist/images/layers.png); }
+
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url(../lib/img/leaflet/dist/images/layers-2x.png); }
+
+.with-bg-color {
+  display: inline-block;
+  border: none;
+  border-radius: 3em;
+  text-align: center;
+  line-height: 1.2em;
+  min-width: 1em;
+  padding: 0.2em 0.3em; }
+
+.old-datetime {
+  text-decoration: line-through; }
+
+.outofdate, .error {
+  color: #e60000; }
+
+.almost_outofdate {
+  color: #c9731d; }
+
+.unavailable {
+  color: #c9731d; }
+
+.available {
+  color: #e2e5b3; }
+
+.street {
+  color: #353535;
+  font-weight: bold; }
+
+.next-street {
+  color: #353535;
+  font-weight: bold; }
+
+.length {
+  color: #353535;
+  font-weight: bold; }
+
+.gray-and-bold {
+  color: #353535;
+  font-weight: bold; }
+
+.stands-status.closed {
+  color: #e60000; }
+
+.unknown {
+  color: #353535; }
+
+img.picto {
+  vertical-align: middle;
+  height: 1.6em; }
+
+.mode-and-code {
+  white-space: nowrap; }
+
+.section-additional-block {
+  white-space: nowrap; }
+
+.section-additional-block:before {
+  content: " ";
+  word-spacing: 2em;
+  white-space: normal; }
+
+div.object {
+  margin: 0.5em 0 0.5em 1em;
+  padding: 0;
+  border-style: solid;
+  border-width: 0 0 0 0.2em;
+  border-color: #298bbc; }
+  div.object div.head {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: white;
+    border-radius: 0 0.25em 0.25em 0; }
+  div.object div.name, div.object div.button, div.object div.summary {
+    display: flex;
+    align-items: center;
+    padding: 0.5em; }
+  div.object div.name {
+    font-weight: bold;
+    padding: 0.5em 1em; }
+    div.object div.name a {
+      color: inherit; }
+  div.object div.summary {
+    flex: 1;
+    padding: 0.5em 1em; }
+  div.object div.data {
+    border-style: none;
+    margin: 0;
+    padding: 0; }
+  div.object div.leaflet, div.object .renderjson {
+    margin: 0.5em 0;
+    border-radius: 0 0.25em 0.25em 0; }
+  div.object div.leaflet {
+    height: 80vh; }
+  div.object div.table {
+    overflow-x: auto;
+    margin: 0.5em 0 0.5em 0.5em; }
+    div.object div.table table {
+      background-color: white;
+      border-spacing: 0;
+      border-collapse: collapse;
+      text-align: center; }
+      div.object div.table table th {
+        font-weight: bold;
+        padding: 0.5ex;
+        border: 0.1ex solid #DEDEDE;
+        color: inherit; }
+      div.object div.table table td {
+        padding: 0.5ex;
+        border: 0.1ex solid #DEDEDE;
+        white-space: nowrap; }
+      div.object div.table table td.stop-point {
+        text-align: right; }
+      div.object div.table table td.time {
+        text-align: left; }
+
+div.object, div.object div.object div.object, div.object div.object div.object div.object div.object, div.object div.object div.object div.object div.object div.object div.object, div.object div.object div.object div.object div.object div.object div.object div.object div.object {
+  border-color: #298bbc; }
+  div.object div.name, div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.object div.object div.object div.object div.name {
+    background-color: #e2f1f9; }
+
+div.object div.object, div.object div.object div.object div.object, div.object div.object div.object div.object div.object div.object, div.object div.object div.object div.object div.object div.object div.object div.object, div.object div.object div.object div.object div.object div.object div.object div.object div.object div.object {
+  border-color: #e6ba00; }
+  div.object div.object div.name, div.object div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.object div.object div.object div.name, div.object div.object div.object div.object div.object div.object div.object div.object div.object div.object div.name {
+    background-color: #fff8db; }
+
+@media screen and (max-width: 35em) {
+  div.object {
+    margin-left: 1em; }
+    div.object div.head {
+      flex-wrap: wrap; }
+    div.object div.summary {
+      order: 3;
+      min-width: 80%; } }
+
+#data > div {
+  margin: 0; }
+
+div.object label.objectButton {
+  display: inline-block; }
+
+div.object label.objectButton span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.6em;
+  width: 2.6em;
+  margin-left: 0.25em;
+  border: none;
+  border-radius: 0.25em;
+  text-align: center;
+  background-color: #EFEFEF;
+  color: #353535;
+  font: 1em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer; }
+
+div.object label.objectButton input {
+  display: none; }
+
+div.object label.objectButton input:checked + span {
+  background-color: #298bbc;
+  color: white; }
+
+div.object pre.renderjson {
+  padding: 0.5em 1em;
+  background-color: #353535;
+  color: #DEDEDE;
+  overflow-x: auto;
+  font-size: 1em; }
+  div.object pre.renderjson * {
+    background: none; }
+  div.object pre.renderjson .disclosure {
+    font-size: 1.5em; }
+  div.object pre.renderjson a {
+    text-decoration: none;
+    color: #abd7ed; }
+  div.object pre.renderjson .key {
+    color: #e2e5b3; }
+  div.object pre.renderjson .string {
+    color: #f2cca6; }
+  div.object pre.renderjson .number {
+    color: #cab5e3; }
+  div.object pre.renderjson .boolean {
+    color: #cab5e3; }
+  div.object pre.renderjson .keyword {
+    color: #cab5e3; }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>navitia playground</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="css/vendor.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="img/favicon.ico">
+  </head>
+  <body onload="request.keyboardSubmit()">
+    <ul id="header">
+      <li>
+        <a id="back" href="index.html" title="Go to Homepage">
+          <img id="logo" src="img/n_playground.svg" alt="Logo">
+        </a>
+      </li>
+      <li>
+        <a id="doc" href="http://doc.navitia.io" title="Go to Navitia documentation">
+          <img id="picto" src="img/picto_doc.svg" alt="picto documentation">
+          doc
+        </a>
+      </li>
+      <li id="urlheader">
+        <form action="play.html" method="get">
+          <div id="urlDiv" class="inputDiv">
+            <div class="key">URL</div>
+            <input id="urlinput" name="request" type="url" placeholder="Insert your url">
+            <button>go</button>
+          </div>
+        </form>
+      </li>
+    </ul>
+
+    <div id="content">
+      <div id="request">
+        <div class="hContainer">
+          <h2>Create a request</h2>
+          <div id="credentialsFrame">
+            <h3>Fill out credential info</h3>
+            <div id="credentials">
+              <div id="api" class="inputDiv">
+                <span class="key">API</span>
+                <input placeholder="API" type="url" autocomplete="off" class="api" onfocus="request.updateUrl(this)" oninput="request.updateUrl(this)">
+              </div>
+              <div id="token" class="inputDiv">
+                <span class="key">Token</span>
+                <input placeholder="Token" type="password" autocomplete="off" class="token">
+                <button class="save" onclick="storage.saveTokenFromRequest()">
+                  <img class="saveButton" src="img/save.svg" alt="save token" title="save token">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="pathFrame">
+            <h3>Build your path</h3>
+            <div id="path">
+              <div id="addPathElt" class="inputDiv">
+                <input id="addPathInput" class="addInput" type="text" autocomplete="off" placeholder="type a key to add a path element">
+                <button class="add" onclick="request.insertPathElt()">Add</button>
+              </div>
+              <div id="feature" class="inputDiv">
+                <input id="featureInput" type="text" autocomplete="off" onfocus="request.updateUrl(this)" oninput="request.updateUrl(this)" placeholder="empty feature">
+              </div>
+            </div>
+          </div><!-- pathFrame -->
+          <div id="parameterFrame">
+            <h3>Add parameters</h3>
+            <div id="parameters">
+              <div id="addParam" class="inputDiv">
+                <input id="addParamInput" class="addInput" type="text" autocomplete="off" placeholder="type a key to add a parameter">
+                <button class="add" onclick="request.insertParam()">Add</button>
+              </div>
+            </div>
+          </div><!-- parameterFrame -->
+          <div id="createdRequestFrame">
+            <h3>Send the request</h3>
+            <div id="urlDiv" class="inputDiv">
+              <div class="key">URL</div>
+              <div id="requestUrl"></div>
+            </div>
+            <div id="submitDiv">
+              <button class="Submit" onclick="request.submit()">Submit</button>
+              or Ctrl+Enter
+            </div>
+          </div><!-- createdRequestFrame -->
+        </div><!-- hContainer -->
+      </div><!-- request-->
+
+      <hr>
+
+      <div id="response"><!-- response -->
+        <div class="hContainer">
+          <h2>Explore the response</h2>
+          <div id="status">Loading...</div>
+          <div id="data"></div>
+        </div><!-- hContainer -->
+      </div><!-- response -->
+    </div><!-- content -->
+
+    <button onclick="response.topFunction()" id="goTopButton" title="Go to top">▲</button>
+
+    <footer>
+      © 2021 <a href="http://navitia.io/">Kisio Digital</a>
+      − <a href="https://github.com/CanalTP/navitia-playground">Fork
+      me on GitHub</a>
+    </footer>
+
+    <script src="lib/lib.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          request.manage();
+          response.manageUrl();
+      });
+    </script>
+  </body>
+</html>

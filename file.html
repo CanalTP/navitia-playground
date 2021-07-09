@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>navitia playground</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="css/vendor.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="img/favicon.ico">
+  </head>
+  <body>
+    <ul id="header">
+      <li>
+        <a id="back" href="index.html" title="Go to Homepage">
+          <img id="logo" src="img/n_playground.svg" alt="Logo">
+        </a>
+      </li>
+      <li>
+        <a id="doc" href="http://doc.navitia.io" title="Go to Navitia documentation">
+          <img id="picto" src="img/picto_doc.svg" alt="picto documentation">
+          doc
+        </a>
+      </li>
+      <li id="urlheader">
+        <form action="play.html" method="get">
+          <div id="urlDiv" class="inputDiv">
+            <div class="key">URL</div>
+            <input id="urlinput" name="request" type="url" placeholder="Insert your url">
+            <button>go</button>
+          </div>
+        </form>
+      </li>
+    </ul>
+
+    <div id="content">
+
+      <div id="give">
+        <div class="hContainer">
+          <h2>Give your Json</h2>
+          <p class="center">
+            <input type="file" id="file-input">
+            <label for="file-input">Search your Json</label>
+          </p>
+
+          <p class="center">or drag it on the page.</p>
+        </div><!-- hContainer -->
+      </div><!-- request-->
+
+      <hr>
+
+      <div id="response"><!-- response -->
+        <div class="hContainer">
+          <h2>Explore the response</h2>
+          <div id="status">Waiting for your Json...</div>
+          <div id="data"></div>
+        </div><!-- hContainer -->
+      </div><!-- response -->
+    </div><!-- content -->
+
+    <footer>
+      © 2021 <a href="http://navitia.io/">Kisio Digital</a>
+      − <a href="https://github.com/CanalTP/navitia-playground">Fork
+      me on GitHub</a>
+    </footer>
+
+    <script src="lib/lib.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script>
+      $(document).ready(function() { response.manageFile(); })
+    </script>
+  </body>
+</html>
